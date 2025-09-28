@@ -1,0 +1,5 @@
+{
+  "type": "PromptTemplate",
+  "input_variables": ["paper_input", "style_input", "length_input"],
+  "template": "You are an assistant that summarizes academic research papers.\n\nPaper: {paper_input}\nStyle: {style_input}\nLength: {length_input}\n\nProvide a clear summary."
+}
