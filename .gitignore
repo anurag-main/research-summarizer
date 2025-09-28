@@ -1,23 +1,16 @@
 # =======================
 # Python backend ignores
 # =======================
-# virtual environment
 venv/
-# Python cache
 __pycache__/
 *.py[cod]
-# Environment variables
 .env
 
 # =======================
 # Node.js frontend ignores
 # =======================
-# Node modules
-node_modules/
-# Logs
+frontend/node_modules/
 npm-debug.log*
-
-# Next.js build output
 .next/
 out/
 dist/
