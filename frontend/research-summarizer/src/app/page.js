@@ -1,21 +1,29 @@
 "use client";
 import { useState } from "react";
 import styles from "./home.module.css";
+
 export default function Home() {
-  const [paper, setPaper] = useState("Attention Is All You Need");
+  const [file, setFile] = useState(null);
   const [style, setStyle] = useState("Beginner-Friendly");
   const [length, setLength] = useState("Short (1-2 paragraphs)");
   const [summary, setSummary] = useState("");
+
   async function handleSummarize() {
+    if (!file) {
+      alert("Please upload a text file!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("style_input", style);
+    formData.append("length_input", length);
+
     const response = await fetch("http://127.0.0.1:8000/summarize", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        paper_input: paper,
-        style_input: style,
-        length_input: length,
-      }),
+      body: formData,
     });
+
     const data = await response.json();
     setSummary(data.summary);
   }
@@ -24,15 +32,13 @@ export default function Home() {
     <div className={styles.container}>
       <h1 className={styles.title}>Research Summarizer</h1>
 
-      <div>
-        <label className={styles.label}>Paper:</label>
-        <select className={styles.select} value={paper} onChange={(e) => setPaper(e.target.value)}>
-          <option>Attention Is All You Need</option>
-          <option>BERT: Pre-training of Deep Bidirectional Transformers</option>
-          <option>GPT-3: Language Models are Few-Shot Learners</option>
-          <option>Diffusion Models Beat GANs on Image Synthesis</option>
-        </select>
-      </div>
+      <label className={styles.label}>Upload a .txt file:</label>
+      <input
+        type="file"
+        accept=".txt"
+        onChange={(e) => setFile(e.target.files[0])}
+        className={styles.input}
+      />
 
       <div>
         <label className={styles.label}>Style:</label>
