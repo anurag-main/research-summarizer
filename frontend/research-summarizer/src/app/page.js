@@ -34,11 +34,12 @@ export default function Home() {
 
       <label className={styles.label}>Upload a .txt file:</label>
       <input
-        type="file"
-        accept=".txt"
-        onChange={(e) => setFile(e.target.files[0])}
-        className={styles.input}
-      />
+  type="file"
+  accept=".txt,.pdf"
+  onChange={(e) => setFile(e.target.files[0])}
+  className={styles.input}
+/>
+
 
       <div>
         <label className={styles.label}>Style:</label>
